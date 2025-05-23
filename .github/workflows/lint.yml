@@ -1,9 +1,11 @@
 name: 'Lint Python Code' # La pipeline tiene que tener un nombre
 on: # Cuándo se va a activar
   push: # Only execute pipeline when someone pushes a commit to these branches
-    - master
+    branches:
+      - master
   pull_request:
-    - master
+    branches:
+      - master
 
 jobs:
   lint: # Name of the job
