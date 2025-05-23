@@ -1,0 +1,25 @@
+name: 'Deploy Webpage' # La pipeline tiene que tener un nombre
+on: # Cuándo se va a activar
+  push: # Only execute pipeline when someone pushes a commit to these branches
+    branches:
+      - main
+
+jobs:
+  pages: # Name of the job
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      pages: write
+    steps: # Cada guión es un step
+      - uses: actions/checkout@v4 # @v_numero es la versión
+      - name: Create artifact
+        run: |
+          mkdir -p public
+          mv index.html public/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path:
+            ./public
+      - id: deployment
+        uses: actions/deploy-pages@v4
+      
